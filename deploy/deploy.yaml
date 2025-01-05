@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: sp3ar007/pythonapp:sha-d7281c9
+        image: sp3ar007/pythonapp:sha-e9fa0e0
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
@@ -95,7 +95,7 @@ spec:
   issuerRef:
     name: production-app
     kind: ClusterIssuer
-  commonName: 34.100.177.189.nip.io
+  commonName:  34.100.177.189.nip.io
   dnsNames:
   - 34.100.177.189.nip.io 
 ---
