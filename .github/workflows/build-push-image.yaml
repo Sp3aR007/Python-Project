@@ -38,8 +38,8 @@ jobs:
       - name: Generate deploy manifest from Jinja template
         uses: cuchi/jinja2-action@v1.1.0
         with: 
-          template: app/tmpl/deploy.j2
-          output_file: app/deploy/deploy.yaml
+          template: tmpl/deploy.j2
+          output_file: deploy/deploy.yaml
           strict: true
           variables: |
             image_deploy_tag=sha-${{ env.sha_short }}
