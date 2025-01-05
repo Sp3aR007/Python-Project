@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: saiyam911/kubesimplify-demo:sha-fca78b0
+        image: sp3ar007/pythonapp
         imagePullPolicy: Always
         env:
         - name: DB_USERNAME
@@ -95,9 +95,9 @@ spec:
   issuerRef:
     name: production-app
     kind: ClusterIssuer
-  commonName: demo.kubesimplify.com
+  commonName: 34.100.177.189.nip.io
   dnsNames:
-  - demo.kubesimplify.com 
+  - 34.100.177.189.nip.io
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -109,7 +109,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demo.kubesimplify.com
+  - host: 34.100.177.189.nip.io
     http:
       paths:
       - path: /
@@ -121,7 +121,7 @@ spec:
               number: 80
   tls:
   - hosts:
-    - demo.kubesimplify.com
+    - 34.100.177.189.nip.io
     secretName: app
 ---
 apiVersion: v1
