@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app
+spec:
+  secretName: app
+  issuerRef:
+    name: production-app
+    kind: ClusterIssuer
+  commonName: 34.100.177.189.nip.io
+  dnsNames:
+  - 34.100.177.189.nip.io
