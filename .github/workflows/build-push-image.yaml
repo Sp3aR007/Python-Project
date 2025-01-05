@@ -30,7 +30,7 @@ jobs:
           push: true
           tags: |
             sp3ar007/pythonapp:latest
-            sap3ar007/pythonapp:sha-${{ env.sha_short }}
+            sp3ar007/pythonapp:sha-${{ env.sha_short }}
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
