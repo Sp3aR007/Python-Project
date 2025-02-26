@@ -1,15 +1,32 @@
-## Create image
-` docker build --no-cache --platform=linux/amd64 -t sp3ar007/pythonapp . `
-## Install cloudnative PG
+A Python application with Docker containerization, Kubernetes Orchestration, Github Actions CI, ArgoCD for CD and Nginx ingress for routing and external access.
+
+### Docker Build
+
+## Create Docker image
+```
+docker build --no-cache --platform=linux/amd64 -t sp3ar007/pythonapp .
+```
+
+## Run the container locally
+
+```
+docker run --name python-app -p 8080:8080 sp3ar007/pythonapp
+```
+
+### Kubernetes Deployment
+
+## Install CloudnativePG Postgres Database
 ```
 kubectl apply --server-side -f \
   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.23/releases/cnpg-1.23.1.yaml
 ```
-## create Database cluster
-`kubectl apply -f postgres-cluster.yaml`
+## create Postgres Database cluster
+```
+kubectl apply -f postgres-cluster.yaml
+```
 ## Create secret 
 ```
-kubectl create secret generic my-postgresql-credentials --from-literal=password='new_password'  --from-literal=username='goals_user'  --dry-run=client -o yaml | kubectl apply -f -
+kubectl apply -f secret.yaml
 ```
 
 ## Exec into pod to create table
@@ -26,31 +43,41 @@ CREATE TABLE goals (
 "
 ```
 
+## Create kubernetes deployment and service
+```
+kubectl apply -f deploy.yaml
+kubectl apply -f service.yaml
+```
 
 ===============================================
 ## Install CERT MANAGER
+```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.yaml
+```
 
 ## Install nginx ingress controller 
+```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.4/deploy/static/provider/cloud/deploy.yaml
+```
 
 ## Install Metrics server
+```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
 
-===============================================
-
-# GithubActions and ArgoCD
-
-## Steps 
-Create .github/workflows folder 
-Create a file build-push-image.yaml 
-Create a jinja template app/tmpl/deploy.j2
-Create deployment file - /app/deploy/deploy.yaml
-Create GitHub Actions secret - DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD
-Make sure your actions have push access as well. 
+## Create ingress for deployment
+```
+kubectl apply -f ingress.yaml
+```
 
 
-## Install ArgoCd
+### Create certificate for the tls access and also issue the certificate for the domain name
+```
+kubectl apply -f certificate.yaml
+kubectl apply -f cluster_issuer.yaml
+```
+
+## Create argocd namespace and Install ArgoCD.
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -58,3 +85,6 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 kubectl get secret -n argocd argocd-initial-admin-secret -oyaml
 
 ```
+
+### Deployment 
+![Kubernetes-Deployment](images/k8s-deploy.png) 
