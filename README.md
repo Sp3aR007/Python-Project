@@ -1,6 +1,6 @@
 A Python application with Docker containerization, Kubernetes Orchestration, Github Actions CI, ArgoCD for CD and Nginx ingress for routing and external access.
 
-### Docker Build
+# Docker Build
 
 ## Create Docker image
 ```
@@ -13,7 +13,7 @@ docker build --no-cache --platform=linux/amd64 -t sp3ar007/pythonapp .
 docker run --name python-app -p 8080:8080 sp3ar007/pythonapp
 ```
 
-### Kubernetes Deployment
+# Kubernetes Deployment
 
 ## Install CloudnativePG Postgres Database
 ```
@@ -49,7 +49,6 @@ kubectl apply -f deploy.yaml
 kubectl apply -f service.yaml
 ```
 
-===============================================
 ## Install CERT MANAGER
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.5/cert-manager.yaml
@@ -86,5 +85,5 @@ kubectl get secret -n argocd argocd-initial-admin-secret -oyaml
 
 ```
 
-### Deployment 
+# Deployment Details with SSL Encryption
 ![Kubernetes-Deployment](images/k8s-deploy.png) 
