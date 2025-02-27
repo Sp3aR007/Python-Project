@@ -20,14 +20,17 @@ docker run --name python-app -p 8080:8080 sp3ar007/pythonapp
 kubectl apply --server-side -f \
   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.23/releases/cnpg-1.23.1.yaml
 ```
+
+## Create secret for application and database
+```
+kubectl apply -f deploy/secret.yaml
+```
+
 ## create Postgres Database cluster
 ```
-kubectl apply -f postgres-cluster.yaml
+kubectl apply -f deploy/postgres-cluster.yaml
 ```
-## Create secret 
-```
-kubectl apply -f secret.yaml
-```
+
 
 ## Exec into pod to create table
 
@@ -45,8 +48,8 @@ CREATE TABLE goals (
 
 ## Create kubernetes deployment and service
 ```
-kubectl apply -f deploy.yaml
-kubectl apply -f service.yaml
+kubectl apply -f deploy/deploy.yaml
+kubectl apply -f deploy/service.yaml
 ```
 
 ## Install CERT MANAGER
@@ -66,14 +69,14 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 ## Create ingress for deployment
 ```
-kubectl apply -f ingress.yaml
+kubectl apply -f deploy/ingress.yaml
 ```
 
 
 ### Create certificate for the tls access and also issue the certificate for the domain name
 ```
-kubectl apply -f certificate.yaml
-kubectl apply -f cluster_issuer.yaml
+kubectl apply -f deploy/certificate.yaml
+kubectl apply -f deploy/cluster_issuer.yaml
 ```
 
 ## Create argocd namespace and Install ArgoCD.
